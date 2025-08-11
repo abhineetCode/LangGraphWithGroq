@@ -8,6 +8,19 @@ from langgraph.prebuilt import ToolNode, tools_condition
 from IPython.display import Image, display
 from langchain_tavily import TavilySearch
 
+# A ReAct agent is an AI system that integrates reasoning and acting capabilities using the ReAct framework. 
+# This framework combines chain of thought (CoT) reasoning with external tool usage, 
+# enabling large language models (LLMs) to handle complex tasks and decision-making processes.
+# ReAct agents operate by alternating between thoughts, actions, and observations. 
+# This iterative process allows them to break down tasks into manageable steps, perform actions 
+# (e.g., API calls or external tool usage), and reassess their progress based on observations. 
+# For example, when solving a problem, the agent might:
+    #Think: Analyze the task and plan the next step.
+    #Act: Use a tool or retrieve information.
+    #Observe: Evaluate the results and adjust the approach.
+#This loop continues until the agent reaches a confident solution or meets predefined stopping conditions, 
+# such as a maximum number of iterations.
+
 os.environ["TAVILY_API_KEY"] = ""
 os.environ["LANGCHAIN_API_KEY"] = ""
 os.environ["LANGCHAIN_TRACING_V2"] = "TRUE"
