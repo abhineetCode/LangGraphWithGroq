@@ -3,4 +3,5 @@ langsmith
 langchain
 langchain_groq
 langchain_community
+langchain_tavily
 IPython
