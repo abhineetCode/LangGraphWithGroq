@@ -7,7 +7,12 @@ from langgraph.graph.message import add_messages
 from langgraph.prebuilt import ToolNode, tools_condition
 from IPython.display import Image, display
 from langchain_tavily import TavilySearch
+from langgraph.checkpoint.memory import MemorySaver
 
+# An in-memory checkpoint saver that store checkpoints in memory using a defaultdict.
+# only use for debuging or testing purpose.
+#for production use cases install langgraph-checkpoint-postgres
+memory = MemorySaver()
 # A ReAct agent is an AI system that integrates reasoning and acting capabilities using the ReAct framework. 
 # This framework combines chain of thought (CoT) reasoning with external tool usage, 
 # enabling large language models (LLMs) to handle complex tasks and decision-making processes.
@@ -55,7 +60,8 @@ graph_builder.add_conditional_edges("chatbot", tools_condition)
 
 graph_builder.add_edge("tools", "chatbot")
 
-graph= graph_builder.compile()
+graph= graph_builder.compile(checkpointer = memory)
+config = {"configurable": {"thread_id": "1"}}
 
 try:
     display(Image(graph.get_graph().draw_mermaid_png()))
@@ -68,7 +74,7 @@ while True:
   if user_input.lower() in ['quit', 'q']:
     print("Chat Ended")
     break
-  events = graph.stream({"messages": ("user", user_input)}, stream_mode="values")
+  events = graph.stream({"messages": ("user", user_input)}, config, stream_mode="values")
   for event in events:
     event["messages"][-1].pretty_print()
 
