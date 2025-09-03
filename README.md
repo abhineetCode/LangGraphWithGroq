@@ -1,7 +1,7 @@
 # LangGraphWithGroq
 creating sample chatbot with langgraph and groq llm
 Creating REACT Agents
-
+creating toolbinding
 
 create a folder named ChatbotUsingGroqLanggraph
 
