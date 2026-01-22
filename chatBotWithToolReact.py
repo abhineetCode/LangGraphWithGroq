@@ -9,9 +9,6 @@ from IPython.display import Image, display
 from langchain_tavily import TavilySearch
 from langgraph.checkpoint.memory import MemorySaver
 
-# An in-memory checkpoint saver that store checkpoints in memory using a defaultdict.
-# only use for debuging or testing purpose.
-#for production use cases install langgraph-checkpoint-postgres
 memory = MemorySaver()
 # A ReAct agent is an AI system that integrates reasoning and acting capabilities using the ReAct framework. 
 # This framework combines chain of thought (CoT) reasoning with external tool usage, 
@@ -30,7 +27,8 @@ os.environ["TAVILY_API_KEY"] = ""
 os.environ["LANGCHAIN_API_KEY"] = ""
 os.environ["LANGCHAIN_TRACING_V2"] = "TRUE"
 os.environ["LANGCHAIN_PROJECT"] = "myFirstlanggraph"
-llm = ChatGroq(groq_api_key = "", model_name = "Gemma2-9b-It")
+llm = ChatGroq(groq_api_key = "", 
+               model_name = "llama-3.3-70b-versatile")
 
 def multiplyTool(a:int,b:int) -> int:
     """Multiply a and b
